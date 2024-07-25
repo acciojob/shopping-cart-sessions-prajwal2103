@@ -15,17 +15,17 @@ const productList = document.getElementById("product-list");
 const cartList = document.getElementById("cart-list");
 const clearCartBtn = document.getElementById("clear-cart-btn");
 
-// Load cart from localStorage
+// Load cart from sessionStorage
 function loadCart() {
-  const storedCart = localStorage.getItem("cart");
+  const storedCart = sessionStorage.getItem("cart");
   if (storedCart) {
     cart = JSON.parse(storedCart);
   }
 }
 
-// Save cart to localStorage
+// Save cart to sessionStorage
 function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  sessionStorage.setItem("cart", JSON.stringify(cart));
 }
 
 // Render product list
@@ -70,7 +70,7 @@ function addToCart(productId) {
   const product = products.find((product) => product.id === Number(productId));
   if (product && !cart.includes(product)) {
     cart.push(product);
-    saveCart(); // Save cart to localStorage
+    saveCart(); // Save cart to sessionStorage
     renderCart();
   }
 }
@@ -78,19 +78,19 @@ function addToCart(productId) {
 // Remove item from cart
 function removeFromCart(productId) {
   cart = cart.filter((product) => product.id !== Number(productId));
-  saveCart(); // Save cart to localStorage
+  saveCart(); // Save cart to sessionStorage
   renderCart();
 }
 
 // Clear cart
 function clearCart() {
   cart = [];
-  saveCart(); // Save cart to localStorage
+  saveCart(); // Save cart to sessionStorage
   renderCart();
 }
 
 // Initial render
-loadCart(); // Load cart from localStorage
+loadCart(); // Load cart from sessionStorage
 renderProducts();
 renderCart();
 
